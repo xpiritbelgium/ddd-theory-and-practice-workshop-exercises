@@ -12,5 +12,8 @@
     <div class="esh-catalog-price">
         <span>@Model.Price.ToString("N2")</span>
     </div>
+    <div class="esh-catalog-weight">
+    <span>@Model.Weight.ToString("N1")</span>
+</div>
     <input type="hidden" asp-for="@Model.Id" name="id" />
 </form>

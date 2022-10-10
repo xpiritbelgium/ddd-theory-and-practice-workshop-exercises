@@ -1,6 +1,4 @@
-﻿using Microsoft.eShopOnContainers.Services.Catalog.API.Model;
-
-namespace Microsoft.eShopOnContainers.Services.Catalog.API.Infrastructure;
+﻿namespace Microsoft.eShopOnContainers.Services.Catalog.API.Infrastructure;
 
 public class CatalogContextSeed
 {
@@ -77,7 +75,7 @@ public class CatalogContextSeed
     {
         brand = brand.Trim('"').Trim();
 
-        if (String.IsNullOrEmpty(brand))
+        if (string.IsNullOrEmpty(brand))
         {
             throw new Exception("catalog Brand Name is empty");
         }
@@ -132,7 +130,7 @@ public class CatalogContextSeed
     {
         type = type.Trim('"').Trim();
 
-        if (String.IsNullOrEmpty(type))
+        if (string.IsNullOrEmpty(type))
         {
             throw new Exception("catalog Type Name is empty");
         }
@@ -187,7 +185,7 @@ public class CatalogContextSeed
                     .Where(x => x != null);
     }
 
-    private CatalogItem CreateCatalogItem(string[] column, string[] headers, Dictionary<String, int> catalogTypeIdLookup, Dictionary<String, int> catalogBrandIdLookup)
+    private CatalogItem CreateCatalogItem(string[] column, string[] headers, Dictionary<string, int> catalogTypeIdLookup, Dictionary<string, int> catalogBrandIdLookup)
     {
         if (column.Count() != headers.Count())
         {
@@ -207,9 +205,15 @@ public class CatalogContextSeed
         }
 
         string priceString = column[Array.IndexOf(headers, "price")].Trim('"').Trim();
-        if (!Decimal.TryParse(priceString, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out Decimal price))
+        if (!decimal.TryParse(priceString, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal price))
         {
             throw new Exception($"price={priceString}is not a valid decimal number");
+        }
+
+        string weightString = column[Array.IndexOf(headers, "weight")].Trim('"').Trim();
+        if (!decimal.TryParse(weightString, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal weight))
+        {
+            throw new Exception($"weight={weightString}is not a valid decimal number");
         }
 
         var catalogItem = new CatalogItem()
@@ -220,13 +224,14 @@ public class CatalogContextSeed
             Name = column[Array.IndexOf(headers, "name")].Trim('"').Trim(),
             Price = price,
             PictureFileName = column[Array.IndexOf(headers, "picturefilename")].Trim('"').Trim(),
+            Weight = weight
         };
 
         int availableStockIndex = Array.IndexOf(headers, "availablestock");
         if (availableStockIndex != -1)
         {
             string availableStockString = column[availableStockIndex].Trim('"').Trim();
-            if (!String.IsNullOrEmpty(availableStockString))
+            if (!string.IsNullOrEmpty(availableStockString))
             {
                 if (int.TryParse(availableStockString, out int availableStock))
                 {
@@ -243,7 +248,7 @@ public class CatalogContextSeed
         if (restockThresholdIndex != -1)
         {
             string restockThresholdString = column[restockThresholdIndex].Trim('"').Trim();
-            if (!String.IsNullOrEmpty(restockThresholdString))
+            if (!string.IsNullOrEmpty(restockThresholdString))
             {
                 if (int.TryParse(restockThresholdString, out int restockThreshold))
                 {
@@ -260,7 +265,7 @@ public class CatalogContextSeed
         if (maxStockThresholdIndex != -1)
         {
             string maxStockThresholdString = column[maxStockThresholdIndex].Trim('"').Trim();
-            if (!String.IsNullOrEmpty(maxStockThresholdString))
+            if (!string.IsNullOrEmpty(maxStockThresholdString))
             {
                 if (int.TryParse(maxStockThresholdString, out int maxStockThreshold))
                 {
@@ -277,7 +282,7 @@ public class CatalogContextSeed
         if (onReorderIndex != -1)
         {
             string onReorderString = column[onReorderIndex].Trim('"').Trim();
-            if (!String.IsNullOrEmpty(onReorderString))
+            if (!string.IsNullOrEmpty(onReorderString))
             {
                 if (bool.TryParse(onReorderString, out bool onReorder))
                 {
@@ -318,7 +323,7 @@ public class CatalogContextSeed
 
         if (csvheaders.Count() < requiredHeaders.Count())
         {
-            throw new Exception($"requiredHeader count '{ requiredHeaders.Count()}' is bigger then csv header count '{csvheaders.Count()}' ");
+            throw new Exception($"requiredHeader count '{requiredHeaders.Count()}' is bigger then csv header count '{csvheaders.Count()}' ");
         }
 
         if (optionalHeaders != null)

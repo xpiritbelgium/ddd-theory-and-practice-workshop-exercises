@@ -11,4 +11,6 @@ public record CatalogItem
     public string CatalogBrand { get; init; }
     public int CatalogTypeId { get; init; }
     public string CatalogType { get; init; }
+    public decimal Weight { get; init; }
+
 }
