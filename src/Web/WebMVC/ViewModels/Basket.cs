@@ -13,4 +13,9 @@ public record Basket
     {
         return Math.Round(Items.Sum(x => x.UnitPrice * x.Quantity), 2);
     }
+
+    public decimal Weight()
+    {
+        return Math.Round(Items.Sum(x => x.Weight * x.Quantity), 1);
+    }
 }

@@ -58,6 +58,7 @@ public class BasketController : ControllerBase
                     ProductName = catalogItem.Name,
                     PictureUrl = catalogItem.PictureUri,
                     UnitPrice = catalogItem.Price,
+                    Weight = catalogItem.Weight,
                     Quantity = bitem.Quantity
                 });
             }
@@ -142,6 +143,7 @@ public class BasketController : ControllerBase
                 ProductId = item.Id,
                 ProductName = item.Name,
                 Quantity = data.Quantity,
+                Weight = item.Weight,
                 Id = Guid.NewGuid().ToString()
             });
         }

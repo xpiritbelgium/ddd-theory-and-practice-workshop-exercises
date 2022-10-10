@@ -12,6 +12,8 @@ public class BasketDataItem
 
     public decimal OldUnitPrice { get; set; }
 
+    public decimal Weight { get; set; }
+
     public int Quantity { get; set; }
 
     public string PictureUrl { get; set; }

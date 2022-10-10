@@ -9,6 +9,9 @@ public class CatalogItem
     public decimal Price { get; set; }
 
     public string PictureUri { get; set; }
+
+    public decimal Weight { get; set; }
+
 }
 
 

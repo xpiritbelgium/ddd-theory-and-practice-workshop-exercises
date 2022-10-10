@@ -40,6 +40,10 @@
             </section>
             <section class="esh-basket-item esh-basket-item--middle col-3">@item.ProductName</section>
             <section class="esh-basket-item esh-basket-item--middle col-2">$ @item.UnitPrice.ToString("N2")</section>
+            <section class="esh-basket-title col-2">Weight</section>
+            <section class="esh-basket-item esh-basket-item--middle esh-basket-item--mark col-2">@Math.Round(item.Quantity * item.Weight, 1).ToString("N1")g</section>
+
+
             <section class="esh-basket-item esh-basket-item--middle col-2">
                 <input type="hidden" name="@("quantities[" + i +"].Key")" value="@item.Id" />
                 <input type="number" class="esh-basket-input" min="1" name="@("quantities[" + i +"].Value")" value="@item.Quantity" />
@@ -60,11 +64,13 @@
             <article class="esh-basket-titles esh-basket-titles--clean row">
                 <section class="esh-basket-title col-10"></section>
                 <section class="esh-basket-title col-2">Total</section>
+                <section class="esh-basket-title col-2">Weight</section>
             </article>
 
             <article class="esh-basket-items row">
                 <section class="esh-basket-item col-10"></section>
                 <section class="esh-basket-item esh-basket-item--mark col-2">$ @Model.Total().ToString("N2")</section>
+                <section class="esh-basket-item esh-basket-item--mark col-2">@Model.Weight().ToString("N1") g</section>
             </article>
 
             <article class="esh-basket-items row">

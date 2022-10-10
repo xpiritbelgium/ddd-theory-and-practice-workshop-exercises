@@ -9,4 +9,5 @@ public record BasketItem
     public decimal OldUnitPrice { get; init; }
     public int Quantity { get; init; }
     public string PictureUrl { get; init; }
+    public decimal Weight { get; init; }
 }

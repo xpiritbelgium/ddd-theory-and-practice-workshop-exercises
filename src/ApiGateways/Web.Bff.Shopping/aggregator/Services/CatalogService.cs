@@ -27,7 +27,7 @@ public class CatalogService : ICatalogService
         _logger.LogInformation("grpc request {@request}", request);
         var response = await _client.GetItemsByIdsAsync(request);
         _logger.LogInformation("grpc response {@response}", response);
-        return response.Data.Select(this.MapToCatalogItemResponse);
+        return response.Data.Select(MapToCatalogItemResponse);
 
     }
 
@@ -38,7 +38,8 @@ public class CatalogService : ICatalogService
             Id = catalogItemResponse.Id,
             Name = catalogItemResponse.Name,
             PictureUri = catalogItemResponse.PictureUri,
-            Price = (decimal)catalogItemResponse.Price
+            Price = (decimal)catalogItemResponse.Price,
+            Weight = (decimal)catalogItemResponse.Weight,
         };
     }
 }

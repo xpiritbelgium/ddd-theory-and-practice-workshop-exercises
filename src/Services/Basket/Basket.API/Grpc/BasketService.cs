@@ -65,6 +65,7 @@ public class BasketService : Basket.BasketBase
             Productid = item.ProductId,
             Productname = item.ProductName,
             Quantity = item.Quantity,
+            Weight = (double)item.Weight,
             Unitprice = (double)item.UnitPrice
         }));
 
@@ -86,6 +87,7 @@ public class BasketService : Basket.BasketBase
             ProductId = item.Productid,
             ProductName = item.Productname,
             Quantity = item.Quantity,
+            Weight = (decimal)item.Weight,
             UnitPrice = (decimal)item.Unitprice
         }));
 

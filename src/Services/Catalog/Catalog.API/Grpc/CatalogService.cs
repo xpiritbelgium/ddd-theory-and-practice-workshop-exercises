@@ -9,7 +9,7 @@ public class CatalogService : CatalogBase
     private readonly CatalogContext _catalogContext;
     private readonly CatalogSettings _settings;
     private readonly ILogger _logger;
-    
+
     public CatalogService(CatalogContext dbContext, IOptions<CatalogSettings> settings, ILogger<CatalogService> logger)
     {
         _settings = settings.Value;
@@ -44,6 +44,7 @@ public class CatalogService : CatalogBase
                 PictureFileName = item.PictureFileName,
                 PictureUri = item.PictureUri,
                 Price = (double)item.Price,
+                Weight = (double)item.Weight,
                 RestockThreshold = item.RestockThreshold
             };
         }
@@ -62,7 +63,7 @@ public class CatalogService : CatalogBase
                 new Status(StatusCode.NotFound, $"ids value invalid. Must be comma-separated list of numbers") :
                 new Status(StatusCode.OK, string.Empty);
 
-            return this.MapToResponse(items);
+            return MapToResponse(items);
         }
 
         var totalItems = await _catalogContext.CatalogItems
@@ -85,7 +86,7 @@ public class CatalogService : CatalogBase
 
         itemsOnPage = ChangeUriPlaceholder(itemsOnPage);
 
-        var model = this.MapToResponse(itemsOnPage, totalItems, request.PageIndex, request.PageSize);
+        var model = MapToResponse(itemsOnPage, totalItems, request.PageIndex, request.PageSize);
         context.Status = new Status(StatusCode.OK, string.Empty);
 
         return model;
@@ -93,7 +94,7 @@ public class CatalogService : CatalogBase
 
     private PaginatedItemsResponse MapToResponse(List<CatalogItem> items)
     {
-        return this.MapToResponse(items, items.Count, 1, items.Count);
+        return MapToResponse(items, items.Count, 1, items.Count);
     }
 
     private PaginatedItemsResponse MapToResponse(List<CatalogItem> items, long count, int pageIndex, int pageSize)
@@ -135,6 +136,7 @@ public class CatalogService : CatalogBase
                 RestockThreshold = i.RestockThreshold,
                 CatalogBrand = brand,
                 CatalogType = catalogType,
+                Weight = (double)i.Weight,
                 Price = (double)i.Price,
             });
         });

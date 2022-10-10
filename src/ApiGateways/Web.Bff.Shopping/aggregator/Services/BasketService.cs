@@ -10,7 +10,7 @@ public class BasketService : IBasketService
         _basketClient = basketClient;
         _logger = logger;
     }
-    
+
     public async Task<BasketData> GetByIdAsync(string id)
     {
         _logger.LogDebug("grpc client created, request = {@id}", id);
@@ -51,6 +51,7 @@ public class BasketService : IBasketService
                     OldUnitPrice = (decimal)item.Oldunitprice,
                     PictureUrl = item.Pictureurl,
                     ProductId = item.Productid,
+                    Weight = (decimal)item.Weight,
                     ProductName = item.Productname,
                     Quantity = item.Quantity,
                     UnitPrice = (decimal)item.Unitprice
@@ -83,6 +84,7 @@ public class BasketService : IBasketService
                     Oldunitprice = (double)item.OldUnitPrice,
                     Pictureurl = item.PictureUrl,
                     Productid = item.ProductId,
+                    Weight = (double)item.Weight,
                     Productname = item.ProductName,
                     Quantity = item.Quantity,
                     Unitprice = (double)item.UnitPrice
